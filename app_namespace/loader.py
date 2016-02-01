@@ -9,7 +9,13 @@ import six
 from django.conf import settings
 from django.utils._os import safe_join
 from django.utils.functional import cached_property
-from django.template.base import TemplateDoesNotExist
+
+try:
+    from django.template.base import TemplateDoesNotExist
+except ImportError:  # pragma: no cover
+    # Removed in Django 1.9
+    from django.template import TemplateDoesNotExist
+
 from django.core.exceptions import ImproperlyConfigured
 try:
     from django.template.loaders.base import Loader as BaseLoader
